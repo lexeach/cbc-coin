@@ -1,0 +1,9 @@
+/* .custom-menu .ant-menu-item-selected {
+    background-color: #162a46 !important;
+} */
+
+.ant-tabs-tab-active {
+    background: #ffffff !important;
+    padding: 18px !important;
+    border-radius: 12px 12px 0 0 !important
+}
