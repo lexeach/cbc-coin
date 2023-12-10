@@ -14,21 +14,35 @@ const Dashboard = () => {
   const [realWithdrawableRoi, setRealWithdrawableRoi] = useState();
   const [realWithdrawableStakingRoi, setRealWithdrawableStakingRoi] =
     useState();
-  const [stakeUser, setStakeUser] = useState();
+  const [stakeTimes, setStakeTime] = useState();
+  const [lastStake, setLastStake] = useState();
+  const [totalStake, setTotalStake] = useState();
+  const [currentStake, setCurrentStake] = useState();
+  const [rootStakeBalance, setRootStakeBalance] = useState();
+  const [takenStkngReward, setTakenStkngReward] = useState();
+
   const [totalIncomeTaken, setTotalIncomeTaken] = useState();
   const [totalWithdrawable, setTotalWithdrawable] = useState();
-  const [users, setUsers] = useState();
+  const [userExist, setUserExist] = useState();
+  const [userId, setUserId] = useState();
+  const [userReferrerId, setUserReferrerId] = useState();
+  const [topupAmount, setTopupAmount] = useState();
+  const [referredUsers, setReferredUsers] = useState();
+  const [capping, setCapping] = useState();
+  const [income, setIncome] = useState();
+  const [rootBalance, setRootBalance] = useState();
+  const [assuredReward, setAssuredReward] = useState();
+  const [levelIncomeReceived, setLevelIncomeReceived] = useState();
+  const [incomeTaken, setIncomeTaken] = useState();
+  const [takenROI, setTakenROI] = useState();
+  const [userStakeTimes, setUserStakeTimes] = useState();
+  const [incomeMissed, setIncomeMissed] = useState();
   const [withdrawableIncome, setWithdrawableIncome] = useState();
 
   const [referrerId, setReferrerId] = useState();
-  // const [topupVal, setTopupVal] = useState();
   const [stakeAmount, setStakeAmount] = useState();
   const [stakeMonths, setStakeMonths] = useState("24");
-
-  function roundToFour(num) {
-    return +(Math.round(num + "e+4") + "e-4");
-  }
-
+  const [topUpAmounts, setTopUpAmounts] = useState("50");
   useEffect(() => {
     async function load() {
       const accounts = await web3.eth.requestAccounts();
@@ -41,47 +55,100 @@ const Dashboard = () => {
       // let BEP20_ = new web3.eth.Contract(BEP20.ABI, BEP20.address);
       let NEW_CBC_ROI = new web3.eth.Contract(ICU.ABI, ICU.address);
       let RegistrationFee = await NEW_CBC_ROI.methods
-        .withdrawableROI(accounts[0])
+        .REGESTRATION_FESS()
         .call();
       console.log("Accounts of zero is :", accounts[0]);
 
-      const convert_regfee = web3.utils.fromWei(RegistrationFee, "ether");
+      const convert_regfee = Number(
+        web3.utils.fromWei(RegistrationFee, "ether")
+      ).toFixed(2);
       setRegistrationFee(convert_regfee);
-
-      console.log("NEW_CBC_ROI: ", NEW_CBC_ROI);
-      console.log("account[0] ", accounts[0]);
       // set Last TopUp:
-      const lastTopsup = await NEW_CBC_ROI.methods
-        .lastTopup(accounts[0])
-        .call();
+      let lastTopsup = await NEW_CBC_ROI.methods.lastTopup(accounts[0]).call();
+      lastTopsup = Number(web3.utils.fromWei(lastTopsup, "ether")).toFixed(2);
       setLastTopUp(lastTopsup);
       // Set Real Withdrawable ROI
-      const realROI = await NEW_CBC_ROI.methods
+      let realROI = await NEW_CBC_ROI.methods
         .realWithdrableROI(accounts[0])
         .call();
+      realROI = Number(web3.utils.fromWei(realROI, "ether")).toFixed(2);
       setRealWithdrawableRoi(realROI);
-      console.log("Is it here:");
       // Set Real Withdrawable Staking ROI
-      const realStakingRoi = await NEW_CBC_ROI.methods
+      let realStakingRoi = await NEW_CBC_ROI.methods
         .realWithdrawableStakingROI(accounts[0])
         .call();
+      realStakingRoi = Number(
+        web3.utils.fromWei(realStakingRoi, "ether")
+      ).toFixed(2);
       setRealWithdrawableStakingRoi(realStakingRoi);
       // Set Stacke
       const stakeUse = await NEW_CBC_ROI.methods.stakeUser(accounts[0]).call();
-      setStakeUser(stakeUse.totalStaked);
+      setStakeTime(stakeUse.stakeTimes);
+      setLastStake(
+        Number(web3.utils.fromWei(stakeUse.lastStaked, "ether")).toFixed(2)
+      );
+      setTotalStake(
+        Number(web3.utils.fromWei(stakeUse.totalStaked, "ether")).toFixed(2)
+      );
+      setCurrentStake(
+        Number(web3.utils.fromWei(stakeUse.currentStaked, "ether")).toFixed(2)
+      );
+      setRootStakeBalance(
+        Number(web3.utils.fromWei(stakeUse.rootStakeBalance, "ether")).toFixed(
+          2
+        )
+      );
+      setTakenStkngReward(
+        Number(web3.utils.fromWei(stakeUse.takenStkngReward, "ether")).toFixed(
+          2
+        )
+      );
       // Set Total Token Taken
       const totalTokenTaken = await NEW_CBC_ROI.methods
         .totalIncomeTaken(accounts[0])
         .call();
-      setTotalIncomeTaken(totalTokenTaken);
+      setTotalIncomeTaken(
+        Number(web3.utils.fromWei(totalTokenTaken, "ether")).toFixed(2)
+      );
       // Set Total Withdrawable
       const totalWithdrawa = await NEW_CBC_ROI.methods
         .totalWithdrawable(accounts[0])
         .call();
-      setTotalWithdrawable(totalWithdrawa);
+
+      setTotalWithdrawable(
+        Number(web3.utils.fromWei(totalWithdrawa, "ether")).toFixed(2)
+      );
       // Set users data
       const user = await NEW_CBC_ROI.methods.users(accounts[0]).call();
-      setUsers(user.id);
+      setUserExist(user.isExist);
+      setUserId(user.id);
+      setUserReferrerId(user.referrerID);
+      setTopupAmount(
+        Number(web3.utils.fromWei(user.topupAmount, "ether")).toFixed(2)
+      );
+      setReferredUsers(user.referredUsers);
+      setCapping(Number(web3.utils.fromWei(user.capping, "ether")).toFixed(2));
+      setIncome(Number(web3.utils.fromWei(user.income, "ether")).toFixed(2));
+      setRootBalance(
+        Number(web3.utils.fromWei(user.rootBalance, "ether")).toFixed(2)
+      );
+      setAssuredReward(
+        Number(web3.utils.fromWei(user.assuredReward, "ether")).toFixed(2)
+      );
+      setLevelIncomeReceived(
+        Number(web3.utils.fromWei(user.levelIncomeReceived, "ether")).toFixed(2)
+      );
+      setIncomeTaken(
+        Number(web3.utils.fromWei(user.incomeTaken, "ether")).toFixed(2)
+      );
+      setTakenROI(
+        Number(web3.utils.fromWei(user.takenROI, "ether")).toFixed(2)
+      );
+      setUserStakeTimes(user.stakeTimes);
+      setIncomeMissed(
+        Number(web3.utils.fromWei(user.incomeMissed, "ether")).toFixed(2)
+      );
+      // setUsers(user.id);
       // set withdrawable Income
       const withdrawableInc = await NEW_CBC_ROI.methods
         .withdrawableIncome(accounts[0])
@@ -91,20 +158,26 @@ const Dashboard = () => {
 
     load();
   }, []);
-
   // handle change for registration
   const handleChange = (event) => {
     // let { name, value } = event.target;
     // setReferrerID({ ...referrerID, [name]: value });
     setReferrerId(event.target.value);
   };
-
   // Function to handle changes in the dropdowns
   const handleChangeDropdownStake = (event) => {
     // Update the selectedValues state based on the dropdown ID
     console.log("Event target", event.target);
     setStakeMonths(event.target.value);
   };
+
+  // Function to handle changes in the dropdowns
+  const handleChangeTopUp = (event) => {
+    // Update the selectedValues state based on the dropdown ID
+    console.log("Top Upd value", event.target.value);
+    setTopUpAmounts(event.target.value);
+  };
+
   const handleChangeStakeAmount = (event) => {
     console.log("Stake Amount", event.target.value);
     setStakeAmount(event.target.value);
@@ -115,33 +188,28 @@ const Dashboard = () => {
     if (typeof value !== "number") {
       return false;
     }
-
     // Check if the value is not less than 100 and not more than 2400
     if (value < 100 || value > 2400) {
       return false;
     }
-
     // Check if the value is a multiple of 100
     if (value % 100 !== 0) {
       return false;
     }
-
     // If all conditions are met, the value is valid
     return true;
   }
-
   // registration
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let id = referrerId;
-
-      let amount = registration_Free; //web3.utils.toWei(amount, "ether") / 10000000000000000;
+      let amount = web3.utils.toWei(registration_Free, "ether"); // registration_Free; //web3.utils.toWei(amount, "ether")).toFixed(2) / 10000000000000000;
+      console.log("Amount To Wei:", amount);
       if (id === "0") {
         id = "50000";
       }
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
-
       let USDT_ = new web3.eth.Contract(USDT.ABI, USDT.address);
       let isAllowance = await USDT_.methods
         .allowance(account, ICU.address)
@@ -192,6 +260,14 @@ const Dashboard = () => {
       } else {
         topUpamount = amount * 2;
       }
+      const isNumber1EqualToNumber2 =
+        Number(topUpamount) === Number(topUpAmounts);
+
+      if (!isNumber1EqualToNumber2) {
+        alert("Please Select Valid Top Up Amount");
+        return;
+      }
+      topUpamount = web3.utils.toWei(topUpamount.toString(), "ether");
       // the approve currentTokenAccepting ERC20-Token-Accepting
 
       let USDT_ = new web3.eth.Contract(USDT.ABI, USDT.address);
@@ -201,7 +277,7 @@ const Dashboard = () => {
       let isApprove, user_topup;
       if (isAllowance < topUpamount) {
         isApprove = await USDT_.methods
-          .approve(ICU.address, amount)
+          .approve(ICU.address, topUpamount)
           .send({ from: account })
           .on("receipt", async function (receipt) {
             user_topup = await ICU_.methods
@@ -243,7 +319,11 @@ const Dashboard = () => {
   const handleSubmitStake = async (event) => {
     event.preventDefault();
     try {
-      if (!isValidValue) {
+      // console.log("Is Valid Value: ", isValidValue);
+      console.log("StakeAmount: ", stakeAmount);
+      let isValid = isValidValue(Number(stakeAmount));
+      console.log("is Valid Value: ", isValid);
+      if (!isValid) {
         alert(
           "Stake CBC Amount should be multiple of >=100 && <2400 and multiple of 100 "
         );
@@ -251,14 +331,15 @@ const Dashboard = () => {
       }
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
       let USDT_ = new web3.eth.Contract(USDT.ABI, USDT.address);
+      let amount = web3.utils.toWei(stakeAmount, "ether");
 
       let isAllowance = await USDT_.methods
         .allowance(account, ICU.address)
         .call();
       let isApprove, reg_user;
-      if (isAllowance < stakeAmount) {
+      if (isAllowance < amount) {
         isApprove = await USDT_.methods
-          .approve(ICU.address, stakeAmount)
+          .approve(ICU.address, amount)
           .send({ from: account })
           .on("receipt", async function (receipt) {
             reg_user = await ICU_.methods
@@ -272,7 +353,7 @@ const Dashboard = () => {
           });
       } else {
         reg_user = await ICU_.methods
-          .stakeCBC(stakeAmount, stakeMonths)
+          .stakeCBC(amount, stakeMonths)
           .send({ from: account });
         console.log("****** native coin accepting condtion", reg_user);
         if (reg_user.status) {
@@ -295,12 +376,11 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Registration Fee</h5>
               <h4 className="mb-0">
-                {registration_Free ? registration_Free : 0} (UPC)
+                {registration_Free ? registration_Free : 0}
               </h4>
             </div>
           </div>
         </div>
-
         {/* metamask balance  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
@@ -322,30 +402,75 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         {/* token price  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
               <h5>Real Withdrawable Staking ROI</h5>
-
               <h4 className="mb-0">
                 {realWithdrawableStakingRoi ? realWithdrawableStakingRoi : 0}{" "}
               </h4>
             </div>
           </div>
         </div>
-
-        {/* is exist  */}
+        {/* Stake Time of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Stake User</h5>
-              <h4 className="mb-0">{stakeUser ? stakeUser : 0}</h4>
+              <h5>Stake Time</h5>
+              <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
             </div>
           </div>
         </div>
-
+        {/* lastStake of User  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Last Stake</h5>
+              <h4 className="mb-0">{lastStake ? lastStake : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* totalStake of User  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Total Stake</h5>
+              <h4 className="mb-0">{totalStake ? totalStake : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* currentStake of User  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Current Stake</h5>
+              <h4 className="mb-0">{currentStake ? currentStake : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* rootStakeBalance of User  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Root Stake Balance</h5>
+              <h4 className="mb-0">
+                {rootStakeBalance ? rootStakeBalance : 0}
+              </h4>
+            </div>
+          </div>
+        </div>
+        {/* takenStkngReward of User  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Staking Reward</h5>
+              <h4 className="mb-0">
+                {takenStkngReward ? takenStkngReward : 0}
+              </h4>
+            </div>
+          </div>
+        </div>
         {/* id  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
@@ -368,13 +493,132 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
-        {/* reffered user  */}
+        {/* setUserExist user  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Users</h5>
-              <h4 className="mb-0">{users ? users : 0}</h4>
+              <h5>User Exist</h5>
+              <h4 className="mb-0">{userExist ? userExist : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* userId user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User ID</h5>
+              <h4 className="mb-0">{userId ? userId : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* userReferrerId user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User Referrer ID</h5>
+              <h4 className="mb-0">{userReferrerId ? userReferrerId : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* topupAmount user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User Topup Amount ID</h5>
+              <h4 className="mb-0">{topupAmount ? topupAmount : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* referredUsers user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Referrer User</h5>
+              <h4 className="mb-0">{referredUsers ? referredUsers : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* capping user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User capping</h5>
+              <h4 className="mb-0">{capping ? capping : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* income user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User income</h5>
+              <h4 className="mb-0">{income ? income : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* rootBalance user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User Root Balance</h5>
+              <h4 className="mb-0">{rootBalance ? rootBalance : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* assuredReward user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>User Assure Reward </h5>
+              <h4 className="mb-0">{assuredReward ? assuredReward : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* levelIncomeReceived user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Level Income Received</h5>
+              <h4 className="mb-0">
+                {levelIncomeReceived ? levelIncomeReceived : 0}
+              </h4>
+            </div>
+          </div>
+        </div>
+        {/* incomeTaken user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Income Taken</h5>
+              <h4 className="mb-0">{incomeTaken ? incomeTaken : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* takenROI user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>ROI Taken</h5>
+              <h4 className="mb-0">{takenROI ? takenROI : 0}</h4>
+            </div>
+          </div>
+        </div>
+
+        {/* userStakeTimes user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Stake Times</h5>
+              <h4 className="mb-0">{userStakeTimes ? userStakeTimes : 0}</h4>
+            </div>
+          </div>
+        </div>
+        {/* incomeMissed user  */}
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Income Missed</h5>
+              <h4 className="mb-0">{incomeMissed ? incomeMissed : 0}</h4>
             </div>
           </div>
         </div>
@@ -390,7 +634,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         <div className="col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body text-center">
@@ -429,7 +672,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         {/* TopUP function  */}
         <div className="col-sm-12 col-md-6 col-lg-6 grid-margin">
           <div className="card">
@@ -439,6 +681,22 @@ const Dashboard = () => {
                 <div className="col-sm-12 my-auto">
                   <form className="forms-sample" onSubmit={handleSubmitTopUP}>
                     <div className="form-group w-100">
+                      <label htmlFor="topUpDropDown">
+                        Select TopUp Amount from dropdown:
+                      </label>
+
+                      <select
+                        id="topUp"
+                        className="form-control"
+                        onChange={handleChangeTopUp}
+                        value={topUpAmounts}
+                      >
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="400">400</option>
+                      </select>
+
                       <input
                         className="btn mt-3 submitbtn_"
                         type="submit"
@@ -451,7 +709,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         {/* Stake CBC function  */}
         <div className="col-sm-12 col-md-6 col-lg-6 grid-margin">
           <div className="card">
@@ -499,7 +756,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
         {/* WithDraw All Income  */}
         <div className="col-sm-12 col-md-6 col-lg-6 grid-margin">
           <div className="card">
