@@ -115,14 +115,14 @@ function DrawerAppBar(props) {
               {account}
             </Button>
             <Button
-              onClick={() => openInNewTab("https://swapupc.netlify.app/")}
+              onClick={() => openInNewTab("https://bscscan.com/address/0x57949388158dd8d2a790dbfc51cdf3caa265b64d/")}
               sx={{
                 border: "2px #23def3 solid",
                 color: "#23def3 !important",
                 borderRadius: "20px;",
               }}
             >
-              SWAP
+              CBC
             </Button>
           </Box>
         </Toolbar>
