@@ -96,8 +96,7 @@ const Dashboard = () => {
 
       // setStakeTime(await epochToDate(stakeUse.stakeTimes));
       async function testing() {
-        console.log("stakeUse.stakeTime", stakeUse.stakeTime);
-        setStakeTime(await epochToDate(stakeUse.stakeTime));
+        setStakeTime(await epochToDate(stakeUse.stakeTimes));
       }
       testing();
 
@@ -196,10 +195,11 @@ const Dashboard = () => {
     console.log("millisecond:", milliseconds);
     // Create a new Date object
     const date = new Date(milliseconds);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Month is zero-based, so add 1
+    const year = date.getFullYear();
 
-    // Format the date string using the desired format
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    const formattedDate = date.toLocaleDateString("en-US", options);
+    const formattedDate = `${day}/${month}/${year}`;
 
     return formattedDate;
   }
@@ -312,6 +312,8 @@ const Dashboard = () => {
       } else {
         topUpamount = amount * 2;
       }
+      topUpamount = web3.utils.fromWei(topUpamount.toString(), "ether");
+      console.log("Toup is :", topUpamount, topUpAmounts);
       const isNumber1EqualToNumber2 =
         Number(topUpamount) === Number(topUpAmounts);
 
@@ -362,6 +364,7 @@ const Dashboard = () => {
         }
       }
     } catch (e) {
+      console.log("Errror :", e);
       alert("Error is catched");
     }
   };
@@ -406,7 +409,7 @@ const Dashboard = () => {
           .on("receipt", async function (receipt) {
             setLoading(false);
             reg_user = await ICU_.methods
-              .stakeCBC(stakeAmount, stakeMonths)
+              .stakeCBC(amount, stakeMonths)
               .send({ from: account });
             if (reg_user.status) {
               alert("Stake CBC Success");
@@ -485,10 +488,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body-stakes">
               <h5>Stake Time</h5>
-
-              <h4 className="mb-0">
-                {stakeTimes && <p>{` ${stakeTimes.toLocaleString()}`}</p>}
-              </h4>
+              <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
             </div>
           </div>
         </div>
