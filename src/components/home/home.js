@@ -305,6 +305,9 @@ const Dashboard = () => {
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
       let topUpamount;
       let amount = await ICU_.methods.lastTopup(account).call();
+      console.log("Amount :", amount);
+      amount = web3.utils.fromWei(amount.toString(), "ether");
+
       if (amount == 0) {
         topUpamount = 50;
       } else if (amount == 400) {
@@ -312,7 +315,7 @@ const Dashboard = () => {
       } else {
         topUpamount = amount * 2;
       }
-      topUpamount = web3.utils.fromWei(topUpamount.toString(), "ether");
+      // topUpamount = web3.utils.toWei(topUpamount.toString(), "ether");
       console.log("Toup is :", topUpamount, topUpAmounts);
       const isNumber1EqualToNumber2 =
         Number(topUpamount) === Number(topUpAmounts);
