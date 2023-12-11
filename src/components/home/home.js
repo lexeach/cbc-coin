@@ -468,7 +468,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Real Withdrawable ROI</h5>
+              <h5>Withdrawable ROI</h5>
               <h4 className="mb-0">
                 {realWithdrawableRoi ? realWithdrawableRoi : 0}
               </h4>
@@ -479,7 +479,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Real Withdrawable Staking ROI</h5>
+              <h5>Withdrawable Staking ROI</h5>
               <h4 className="mb-0">
                 {realWithdrawableStakingRoi ? realWithdrawableStakingRoi : 0}{" "}
               </h4>
@@ -526,7 +526,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Root Stake Balance</h5>
+              <h5>Balance Stake ROI</h5>
               <h4 className="mb-0">
                 {rootStakeBalance ? rootStakeBalance : 0}
               </h4>
@@ -588,7 +588,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>User Referrer ID</h5>
+              <h5>Sponsor</h5>
               <h4 className="mb-0">{userReferrerId ? userReferrerId : 0}</h4>
             </div>
           </div>
@@ -606,7 +606,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Referrer User</h5>
+              <h5>Direct</h5>
               <h4 className="mb-0">{referredUsers ? referredUsers : 0}</h4>
             </div>
           </div>
@@ -624,7 +624,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>User income</h5>
+              <h5>Working income</h5>
               <h4 className="mb-0">{income ? income : 0}</h4>
             </div>
           </div>
@@ -633,7 +633,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>User Root Balance</h5>
+              <h5>Balance User ROI</h5>
               <h4 className="mb-0">{rootBalance ? rootBalance : 0}</h4>
             </div>
           </div>
@@ -651,7 +651,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Level Income Received</h5>
+              <h5>Team Size</h5>
               <h4 className="mb-0">
                 {levelIncomeReceived ? levelIncomeReceived : 0}
               </h4>
@@ -681,7 +681,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Stake Times</h5>
+              <h5>Reg Times</h5>
               <h4 className="mb-0">{userStakeTimes ? userStakeTimes : 0}</h4>
             </div>
           </div>
