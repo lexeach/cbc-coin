@@ -1,6 +1,6 @@
 module.exports = {
   ICU: {
-    address: "0xcc63B1778B2b74CD641C72077bCea545F8098ED2",
+    address: "0x5C4bed559c38Ba0e83Fa000C5F0F78D0C46Afe2f",
     ABI: [
       {
         inputs: [
@@ -220,6 +220,31 @@ module.exports = {
         anonymous: false,
         inputs: [
           {
+            indexed: false,
+            internalType: "address",
+            name: "sender",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "address",
+            name: "_to",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+        ],
+        name: "Withdrawal",
+        type: "event",
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
             indexed: true,
             internalType: "address",
             name: "sender",
@@ -239,6 +264,31 @@ module.exports = {
           },
         ],
         name: "allIncomeWithdrawn",
+        type: "event",
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "address",
+            name: "_user",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "_referrer",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "_amount",
+            type: "uint256",
+          },
+        ],
+        name: "rewardBonus",
         type: "event",
       },
       {
@@ -308,6 +358,13 @@ module.exports = {
         ],
         name: "realWithdrawableStakingROI",
         outputs: [{ internalType: "uint256", name: "reward", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [{ internalType: "address", name: "", type: "address" }],
+        name: "rewardWin",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
         stateMutability: "view",
         type: "function",
       },
@@ -473,6 +530,16 @@ module.exports = {
         name: "withdrawableStakingROI",
         outputs: [{ internalType: "uint256", name: "reward", type: "uint256" }],
         stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "address payable", name: "_to", type: "address" },
+          { internalType: "uint256", name: "_amount", type: "uint256" },
+        ],
+        name: "withdrawalStableCoin",
+        outputs: [],
+        stateMutability: "nonpayable",
         type: "function",
       },
     ],

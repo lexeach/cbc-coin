@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 import Web3 from "web3";
 import { ICU, USDT } from "../../utils/web3.js";
-
+// Withdrawalbe income wei to eth : done
+// STake Time change to date: Done
+// Pleae select valid top up already topedup user : ITs working
+// Loader or processer during approval of transaction to send transaction
+// Add card of rewardwin : Done
+// Stake Users card color little bit change > Done
 const Dashboard = () => {
   window.Buffer = Buffer;
 
@@ -38,11 +43,15 @@ const Dashboard = () => {
   const [userStakeTimes, setUserStakeTimes] = useState();
   const [incomeMissed, setIncomeMissed] = useState();
   const [withdrawableIncome, setWithdrawableIncome] = useState();
+  const [rewardWin, setRewardWin] = useState();
 
   const [referrerId, setReferrerId] = useState();
   const [stakeAmount, setStakeAmount] = useState();
   const [stakeMonths, setStakeMonths] = useState("24");
   const [topUpAmounts, setTopUpAmounts] = useState("50");
+
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     async function load() {
       const accounts = await web3.eth.requestAccounts();
@@ -64,6 +73,7 @@ const Dashboard = () => {
       ).toFixed(2);
       setRegistrationFee(convert_regfee);
       // set Last TopUp:
+
       let lastTopsup = await NEW_CBC_ROI.methods.lastTopup(accounts[0]).call();
       lastTopsup = Number(web3.utils.fromWei(lastTopsup, "ether")).toFixed(2);
       setLastTopUp(lastTopsup);
@@ -83,7 +93,14 @@ const Dashboard = () => {
       setRealWithdrawableStakingRoi(realStakingRoi);
       // Set Stacke
       const stakeUse = await NEW_CBC_ROI.methods.stakeUser(accounts[0]).call();
-      setStakeTime(stakeUse.stakeTimes);
+
+      // setStakeTime(await epochToDate(stakeUse.stakeTimes));
+      async function testing() {
+        console.log("stakeUse.stakeTime", stakeUse.stakeTime);
+        setStakeTime(await epochToDate(stakeUse.stakeTime));
+      }
+      testing();
+
       setLastStake(
         Number(web3.utils.fromWei(stakeUse.lastStaked, "ether")).toFixed(2)
       );
@@ -144,20 +161,48 @@ const Dashboard = () => {
       setTakenROI(
         Number(web3.utils.fromWei(user.takenROI, "ether")).toFixed(2)
       );
-      setUserStakeTimes(user.stakeTimes);
+      async function test1() {
+        setUserStakeTimes(await epochToDate(user.stakeTimes));
+      }
+      test1();
       setIncomeMissed(
         Number(web3.utils.fromWei(user.incomeMissed, "ether")).toFixed(2)
       );
+      const rewardWins = await NEW_CBC_ROI.methods
+        .rewardWin(accounts[0])
+        .call();
+
+      setRewardWin(Number(web3.utils.fromWei(rewardWins, "ether")).toFixed(2));
       // setUsers(user.id);
       // set withdrawable Income
       const withdrawableInc = await NEW_CBC_ROI.methods
         .withdrawableIncome(accounts[0])
         .call();
-      setWithdrawableIncome(withdrawableInc);
+      setWithdrawableIncome(
+        Number(web3.utils.fromWei(withdrawableInc, "ether")).toFixed(2)
+      );
     }
 
     load();
   }, []);
+
+  async function epochToDate(epochTime) {
+    // Convert epoch time to milliseconds (JavaScript uses milliseconds)
+    // Convert epoch to milliseconds
+    if (epochTime == undefined || Number(epochTime) <= 0) {
+      return 0;
+    }
+    const milliseconds = epochTime * 1000;
+    console.log("millisecond:", milliseconds);
+    // Create a new Date object
+    const date = new Date(milliseconds);
+
+    // Format the date string using the desired format
+    const options = { year: "numeric", month: "numeric", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+
+    return formattedDate;
+  }
   // handle change for registration
   const handleChange = (event) => {
     // let { name, value } = event.target;
@@ -174,7 +219,6 @@ const Dashboard = () => {
   // Function to handle changes in the dropdowns
   const handleChangeTopUp = (event) => {
     // Update the selectedValues state based on the dropdown ID
-    console.log("Top Upd value", event.target.value);
     setTopUpAmounts(event.target.value);
   };
 
@@ -216,10 +260,14 @@ const Dashboard = () => {
         .call();
       let isApprove, reg_user;
       if (isAllowance < amount) {
+        setLoading(true);
+
         isApprove = await USDT_.methods
           .approve(ICU.address, amount)
           .send({ from: account })
           .on("receipt", async function (receipt) {
+            setLoading(false);
+
             reg_user = await ICU_.methods
               .Registration(id, amount)
               .send({ from: account, value: 0 });
@@ -229,6 +277,10 @@ const Dashboard = () => {
             } else {
               alert("Registerd Failed !!!!");
             }
+          })
+          .on("error", function (error, receipt) {
+            // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+            setLoading(false);
           });
       } else {
         reg_user = await ICU_.methods
@@ -276,10 +328,14 @@ const Dashboard = () => {
         .call();
       let isApprove, user_topup;
       if (isAllowance < topUpamount) {
+        setLoading(true);
+
         isApprove = await USDT_.methods
           .approve(ICU.address, topUpamount)
           .send({ from: account })
           .on("receipt", async function (receipt) {
+            setLoading(false);
+
             user_topup = await ICU_.methods
               .topUp(topUpamount)
               .send({ from: account });
@@ -289,6 +345,10 @@ const Dashboard = () => {
             } else {
               alert("Top UP Failed !!!!");
             }
+          })
+          .on("error", function (error, receipt) {
+            // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+            setLoading(false);
           });
       } else {
         user_topup = await ICU_.methods
@@ -338,10 +398,13 @@ const Dashboard = () => {
         .call();
       let isApprove, reg_user;
       if (isAllowance < amount) {
+        setLoading(true);
+
         isApprove = await USDT_.methods
           .approve(ICU.address, amount)
           .send({ from: account })
           .on("receipt", async function (receipt) {
+            setLoading(false);
             reg_user = await ICU_.methods
               .stakeCBC(stakeAmount, stakeMonths)
               .send({ from: account });
@@ -350,6 +413,10 @@ const Dashboard = () => {
             } else {
               alert("Stake CBC Failed !!!!");
             }
+          })
+          .on("error", function (error, receipt) {
+            // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+            setLoading(false);
           });
       } else {
         reg_user = await ICU_.methods
@@ -416,16 +483,19 @@ const Dashboard = () => {
         {/* Stake Time of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body-stakes">
               <h5>Stake Time</h5>
-              <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
+
+              <h4 className="mb-0">
+                {stakeTimes && <p>{` ${stakeTimes.toLocaleString()}`}</p>}
+              </h4>
             </div>
           </div>
         </div>
         {/* lastStake of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body-stakes">
               <h5>Last Stake</h5>
               <h4 className="mb-0">{lastStake ? lastStake : 0}</h4>
             </div>
@@ -434,7 +504,7 @@ const Dashboard = () => {
         {/* totalStake of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body-stakes">
               <h5>Total Stake</h5>
               <h4 className="mb-0">{totalStake ? totalStake : 0}</h4>
             </div>
@@ -443,7 +513,7 @@ const Dashboard = () => {
         {/* currentStake of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body-stakes">
               <h5>Current Stake</h5>
               <h4 className="mb-0">{currentStake ? currentStake : 0}</h4>
             </div>
@@ -452,7 +522,7 @@ const Dashboard = () => {
         {/* rootStakeBalance of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body-stakes">
               <h5>Root Stake Balance</h5>
               <h4 className="mb-0">
                 {rootStakeBalance ? rootStakeBalance : 0}
@@ -463,7 +533,7 @@ const Dashboard = () => {
         {/* takenStkngReward of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
-            <div className="card-body">
+            <div className="card-body-stakes">
               <h5>Staking Reward</h5>
               <h4 className="mb-0">
                 {takenStkngReward ? takenStkngReward : 0}
@@ -634,6 +704,14 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h5>Reward Win</h5>
+              <h4 className="mb-0">{rewardWin ? rewardWin : 0}</h4>
+            </div>
+          </div>
+        </div>
         <div className="col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body text-center">
@@ -641,6 +719,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* incomeMissed user  */}
+
         {/* Registration function  */}
         <div className="col-sm-12 col-md-6 col-lg-6 grid-margin">
           <div className="card">
@@ -659,10 +740,18 @@ const Dashboard = () => {
                         value={referrerId || ""}
                         placeholder="Referral ID"
                       />
+                      {/* Loader */}
 
+                      {loading && (
+                        <div className="loader-overlay">
+                          {" "}
+                          Transaction is Approving{" "}
+                        </div>
+                      )}
                       <input
                         className="btn mt-3 submitbtn_"
                         type="submit"
+                        disabled={loading}
                         value="Registration"
                       />
                     </div>
@@ -696,7 +785,12 @@ const Dashboard = () => {
                         <option value="200">200</option>
                         <option value="400">400</option>
                       </select>
-
+                      {loading && (
+                        <div className="loader-overlay">
+                          {" "}
+                          Transaction is Approving{" "}
+                        </div>
+                      )}
                       <input
                         className="btn mt-3 submitbtn_"
                         type="submit"
@@ -743,7 +837,12 @@ const Dashboard = () => {
                         <option value="48">48</option>
                         <option value="60">60</option>
                       </select>
-
+                      {loading && (
+                        <div className="loader-overlay">
+                          {" "}
+                          Transaction is Approving{" "}
+                        </div>
+                      )}
                       <input
                         className="btn mt-3 submitbtn_"
                         type="submit"
