@@ -56,10 +56,10 @@ function DrawerAppBar(props) {
       </List>
 
       <List>
-        <a onClick={() => openInNewTab("https://swapupc.netlify.app/")}>
+        <a onClick={() => openInNewTab("https://bscscan.com/address/0x57949388158dd8d2a790dbfc51cdf3caa265b64d")}>
           <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary="SWAP" />
+              <ListItemText primary="CBC" />
             </ListItemButton>
           </ListItem>
         </a>
