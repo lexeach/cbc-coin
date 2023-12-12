@@ -490,7 +490,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Stake Time</h5>
+              <h5># Stake Time</h5>
               <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
             </div>
           </div>
@@ -499,7 +499,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Last Stake</h5>
+              <h5># Last Stake</h5>
               <h4 className="mb-0">{lastStake ? lastStake : 0}</h4>
             </div>
           </div>
@@ -508,7 +508,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Total Stake</h5>
+              <h5># Total Stake</h5>
               <h4 className="mb-0">{totalStake ? totalStake : 0}</h4>
             </div>
           </div>
@@ -517,7 +517,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Current Stake</h5>
+              <h5># Current Stake</h5>
               <h4 className="mb-0">{currentStake ? currentStake : 0}</h4>
             </div>
           </div>
@@ -526,7 +526,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Balance Stake ROI</h5>
+              <h5># Balance Stake ROI</h5>
               <h4 className="mb-0">
                 {rootStakeBalance ? rootStakeBalance : 0}
               </h4>
@@ -537,7 +537,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5>Staking Reward</h5>
+              <h5># Staking Reward</h5>
               <h4 className="mb-0">
                 {takenStkngReward ? takenStkngReward : 0}
               </h4>
