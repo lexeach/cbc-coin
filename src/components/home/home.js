@@ -449,7 +449,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Registration Fee</h5>
               <h4 className="mb-0">
-                {registration_Free ? registration_Free : 0}
+                {registration_Free ? registration_Free : 0} USDT
               </h4>
             </div>
           </div>
@@ -460,7 +460,8 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Last TopUP</h5>
 
-              <h4 className="mb-0">{lastTopUp ? lastTopUp : 0}</h4>
+              <h4 className="mb-0">{lastTopUp ? lastTopUp : 0} USDT
+             </h4>
             </div>
           </div>
         </div>
@@ -470,7 +471,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Withdrawable ROI</h5>
               <h4 className="mb-0">
-                {realWithdrawableRoi ? realWithdrawableRoi : 0}
+                {realWithdrawableRoi ? realWithdrawableRoi : 0} USDT
               </h4>
             </div>
           </div>
@@ -481,7 +482,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Withdrawable Staking ROI</h5>
               <h4 className="mb-0">
-                {realWithdrawableStakingRoi ? realWithdrawableStakingRoi : 0}{" "}
+                {realWithdrawableStakingRoi ? realWithdrawableStakingRoi : 0} USDT{" "}
               </h4>
             </div>
           </div>
@@ -500,7 +501,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body-stakes">
               <h5># Last Stake</h5>
-              <h4 className="mb-0">{lastStake ? lastStake : 0}</h4>
+              <h4 className="mb-0">{lastStake ? lastStake : 0} USDT
+             </h4>
             </div>
           </div>
         </div>
@@ -509,7 +511,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body-stakes">
               <h5># Total Stake</h5>
-              <h4 className="mb-0">{totalStake ? totalStake : 0}</h4>
+              <h4 className="mb-0">{totalStake ? totalStake : 0} USDT
+               </h4>
             </div>
           </div>
         </div>
@@ -518,7 +521,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body-stakes">
               <h5># Current Stake</h5>
-              <h4 className="mb-0">{currentStake ? currentStake : 0}</h4>
+              <h4 className="mb-0">{currentStake ? currentStake : 0} USDT 
+              </h4>
             </div>
           </div>
         </div>
@@ -528,7 +532,7 @@ const Dashboard = () => {
             <div className="card-body-stakes">
               <h5># Balance Stake ROI</h5>
               <h4 className="mb-0">
-                {rootStakeBalance ? rootStakeBalance : 0}
+                {rootStakeBalance ? rootStakeBalance : 0} USDT
               </h4>
             </div>
           </div>
@@ -539,7 +543,7 @@ const Dashboard = () => {
             <div className="card-body-stakes">
               <h5># Staking Reward</h5>
               <h4 className="mb-0">
-                {takenStkngReward ? takenStkngReward : 0}
+                {takenStkngReward ? takenStkngReward : 0} USDT
               </h4>
             </div>
           </div>
@@ -550,7 +554,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Total Income Taken</h5>
               <h4 className="mb-0">
-                {totalIncomeTaken ? totalIncomeTaken : 0}
+                {totalIncomeTaken ? totalIncomeTaken : 0} USDT
               </h4>
             </div>
           </div>
@@ -561,7 +565,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Total Withdrawable</h5>
               <h4 className="mb-0">
-                {totalWithdrawable ? totalWithdrawable : 0}
+                {totalWithdrawable ? totalWithdrawable : 0} USDT
               </h4>
             </div>
           </div>
@@ -598,7 +602,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>User Topup Amount ID</h5>
-              <h4 className="mb-0">{topupAmount ? topupAmount : 0}</h4>
+              <h4 className="mb-0">{topupAmount ? topupAmount : 0} USDT
+              </h4>
             </div>
           </div>
         </div>
@@ -616,7 +621,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>User capping</h5>
-              <h4 className="mb-0">{capping ? capping : 0}</h4>
+              <h4 className="mb-0">{capping ? capping : 0} USDT
+             </h4>
             </div>
           </div>
         </div>
@@ -625,7 +631,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>Working income</h5>
-              <h4 className="mb-0">{income ? income : 0}</h4>
+              <h4 className="mb-0">{income ? income : 0} USDT
+              </h4>
             </div>
           </div>
         </div>
@@ -634,7 +641,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>Balance User ROI</h5>
-              <h4 className="mb-0">{rootBalance ? rootBalance : 0}</h4>
+              <h4 className="mb-0">{rootBalance ? rootBalance : 0} USDT
+               </h4>
             </div>
           </div>
         </div>
@@ -643,7 +651,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>User Assure Reward </h5>
-              <h4 className="mb-0">{assuredReward ? assuredReward : 0}</h4>
+              <h4 className="mb-0">{assuredReward ? assuredReward : 0} USDT
+              </h4>
             </div>
           </div>
         </div>
@@ -663,7 +672,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>Income Taken</h5>
-              <h4 className="mb-0">{incomeTaken ? incomeTaken : 0}</h4>
+              <h4 className="mb-0">{incomeTaken ? incomeTaken : 0} USDT
+              </h4>
             </div>
           </div>
         </div>
@@ -672,7 +682,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>ROI Taken</h5>
-              <h4 className="mb-0">{takenROI ? takenROI : 0}</h4>
+              <h4 className="mb-0">{takenROI ? takenROI : 0} USDT
+            </h4>
             </div>
           </div>
         </div>
@@ -702,7 +713,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h5>Withdrawable Income</h5>
               <h4 className="mb-0">
-                {withdrawableIncome ? withdrawableIncome : 0}
+                {withdrawableIncome ? withdrawableIncome : 0} USDT
               </h4>
             </div>
           </div>
@@ -711,7 +722,8 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h5>Reward Win</h5>
-              <h4 className="mb-0">{rewardWin ? rewardWin : 0}</h4>
+              <h4 className="mb-0">{rewardWin ? rewardWin : 0} USDT
+              </h4>
             </div>
           </div>
         </div>
