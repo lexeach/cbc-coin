@@ -541,7 +541,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Staking Reward</h5>
+              <h5># Staking Bonus</h5>
               <h4 className="mb-0">
                 {takenStkngReward ? takenStkngReward : 0} USDT
               </h4>
@@ -650,7 +650,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>User Assure Reward </h5>
+              <h5>User Assure 200% ROI </h5>
               <h4 className="mb-0">{assuredReward ? assuredReward : 0} USDT
               </h4>
             </div>
