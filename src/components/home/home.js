@@ -152,7 +152,7 @@ const Dashboard = () => {
         Number(web3.utils.fromWei(user.assuredReward, "ether")).toFixed(2)
       );
       setLevelIncomeReceived(
-        Number(user.levelIncomeReceived).toFixed(2)
+        Number(user.levelIncomeReceived).toFixed()
       );
       setIncomeTaken(
         Number(web3.utils.fromWei(user.incomeTaken, "ether")).toFixed(2)
