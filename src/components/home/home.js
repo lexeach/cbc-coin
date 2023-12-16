@@ -165,7 +165,7 @@ const Dashboard = () => {
       }
       test1();
       setIncomeMissed(
-        Number(web3.utils.fromWei(user.incomeMissed, "ether")).toFixed(2)
+        Number(user.incomeMissed).toFixed()
       );
       const rewardWins = await NEW_CBC_ROI.methods
         .rewardWin(accounts[0])
