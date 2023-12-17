@@ -491,7 +491,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Stake Time</h5>
+              <h5># Stake Timer Start</h5>
               <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
             </div>
           </div>
@@ -692,7 +692,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Reg Times</h5>
+              <h5>RIO Timer Start</h5>
               <h4 className="mb-0">{userStakeTimes ? userStakeTimes : 0}</h4>
             </div>
           </div>
