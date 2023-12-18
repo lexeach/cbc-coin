@@ -692,7 +692,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>RIO withdrawal/start time</h5>
+              <h5>ROI withdrawal/start time</h5>
               <h4 className="mb-0">{userStakeTimes ? userStakeTimes : 0}</h4>
             </div>
           </div>
