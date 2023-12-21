@@ -573,7 +573,7 @@ module.exports = {
     ],
   },
   USDT: {
-    address: "0x55d398326f99059fF775485246999027B3197955",
+    address: "0x0EB11261F9F778fEfd688e2dfAdB77862E96605b",
     ABI: [
       {
         inputs: [],
@@ -854,7 +854,7 @@ module.exports = {
     ],
   },
   BEP20: {
-    address: "0x57949388158Dd8D2A790dbfc51CdF3CaA265B64d",
+    address: "0x487C09FfecD0525e3D86E55deF2417542cFBDcC6",
     ABI: [
       { inputs: [], stateMutability: "nonpayable", type: "constructor" },
       {
