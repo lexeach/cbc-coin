@@ -101,6 +101,7 @@ const Dashboard = () => {
       let stakeTim = await NEW_CBC_ROI.methods.stkTime(accounts[0]).call();
       setStkTime(await epochToDate(stakeTim)); // await epochToDate(user.stakeTimes)
       let stkCap = await NEW_CBC_ROI.methods.stkCapping(accounts[0]).call();
+      stkCap = Number(web3.utils.fromWei(stkCap, "ether")).toFixed(2);
       setStkCapping(stkCap);
       let stkMonth = await NEW_CBC_ROI.methods.stakeMonths(accounts[0]).call();
       setStkMonths(stkMonth);
