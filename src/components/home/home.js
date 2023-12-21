@@ -96,10 +96,10 @@ const Dashboard = () => {
       setRealWithdrawableStakingRoi(realStakingRoi);
 
       let regTime = await NEW_CBC_ROI.methods.regTime(accounts[0]).call();
-      setRegistrationTime(regTime);
+      setRegistrationTime(await epochToDate(regTime));
 
       let stakeTim = await NEW_CBC_ROI.methods.stkTime(accounts[0]).call();
-      setStkTime(stakeTim);
+      setStkTime(await epochToDate(stakeTim)); // await epochToDate(user.stakeTimes)
       let stkCap = await NEW_CBC_ROI.methods.stkCapping(accounts[0]).call();
       setStkCapping(stkCap);
       let stkMonth = await NEW_CBC_ROI.methods.stakeMonths(accounts[0]).call();
@@ -139,6 +139,7 @@ const Dashboard = () => {
       setTotalIncomeTaken(
         Number(web3.utils.fromWei(totalTokenTaken, "ether")).toFixed(2)
       );
+      // await epochToDate(user.stakeTimes)
       // Set Total Withdrawable
       const totalWithdrawa = await NEW_CBC_ROI.methods
         .totalWithdrawable(accounts[0])
