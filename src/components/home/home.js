@@ -533,7 +533,7 @@ const Dashboard = () => {
               <h4 className="mb-0">{totalStake ? totalStake : 0} USDT</h4>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* currentStake of User  */}
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
