@@ -923,7 +923,7 @@ const Dashboard = () => {
         <div className="col-sm-12 col-md-6 col-lg-6 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>WithDraw All Income</h5>
+              <h5>WithDraw Staking ROI</h5>
               <div className="row">
                 <div className="col-sm-12 my-auto">
                   <form
@@ -944,7 +944,7 @@ const Dashboard = () => {
           </div>
           <div className="card">
             <div className="card-body">
-              <h5>WithDraw Staking ROI</h5>
+              <h5>WithDraw All Income</h5>
               <div className="row">
                 <div className="col-sm-12 my-auto">
                   <form
