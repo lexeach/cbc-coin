@@ -152,7 +152,7 @@ const Dashboard = () => {
         Number(web3.utils.fromWei(user.assuredReward, "ether")).toFixed(2)
       );
       setLevelIncomeReceived(
-        Number(web3.utils.fromWei(user.levelIncomeReceived, "ether")).toFixed(2)
+        Number(user.levelIncomeReceived).toFixed()
       );
       setIncomeTaken(
         Number(web3.utils.fromWei(user.incomeTaken, "ether")).toFixed(2)
@@ -165,7 +165,7 @@ const Dashboard = () => {
       }
       test1();
       setIncomeMissed(
-        Number(web3.utils.fromWei(user.incomeMissed, "ether")).toFixed(2)
+        Number(user.incomeMissed).toFixed()
       );
       const rewardWins = await NEW_CBC_ROI.methods
         .rewardWin(accounts[0])
@@ -491,7 +491,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Stake Time</h5>
+              <h5># Stake withdrawal/start time</h5>
               <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
             </div>
           </div>
@@ -541,7 +541,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Staking Reward</h5>
+              <h5># Staking Bonus</h5>
               <h4 className="mb-0">
                 {takenStkngReward ? takenStkngReward : 0} USDT
               </h4>
@@ -650,7 +650,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>User Assure Reward </h5>
+              <h5>User Assure 200% ROI </h5>
               <h4 className="mb-0">{assuredReward ? assuredReward : 0} USDT
               </h4>
             </div>
@@ -692,7 +692,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Reg Times</h5>
+              <h5>ROI withdrawal/start time</h5>
               <h4 className="mb-0">{userStakeTimes ? userStakeTimes : 0}</h4>
             </div>
           </div>
