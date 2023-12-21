@@ -529,7 +529,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Total Stake</h5>
+              <h5>Staking Referral Bonus</h5>
               <h4 className="mb-0">{totalStake ? totalStake : 0} USDT</h4>
             </div>
           </div>
