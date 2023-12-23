@@ -489,7 +489,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Withdrawable ROI</h5>
+              <h5>Withdrawable User ROI</h5>
               <h4 className="mb-0">
                 {realWithdrawableRoi ? realWithdrawableRoi : 0} USDT
               </h4>
@@ -512,7 +512,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Stake withdrawal/start time</h5>
+              <h5># Stake withdrawal/start Date</h5>
               <h4 className="mb-0">{stakeTimes ? stakeTimes : 0}</h4>
             </div>
           </div>
@@ -539,7 +539,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Current Stake</h5>
+              <h5># Current Staking</h5>
               <h4 className="mb-0">{currentStake ? currentStake : 0} USDT</h4>
             </div>
           </div>
@@ -548,7 +548,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Balance Stake ROI</h5>
+              <h5># Balance Staking ROI</h5>
               <h4 className="mb-0">
                 {rootStakeBalance ? rootStakeBalance : 0} USDT
               </h4>
@@ -559,7 +559,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body-stakes">
-              <h5># Staking Bonus</h5>
+              <h5># Taken Staking ROI</h5>
               <h4 className="mb-0">
                 {takenStkngReward ? takenStkngReward : 0} USDT
               </h4>
@@ -581,7 +581,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Registration Time </h5>
+              <h5>Registration Date </h5>
               <h4 className="mb-0">
                 {registrationTime ? registrationTime : 0}
               </h4>
@@ -593,7 +593,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Stake Time </h5>
+              <h5>Staking Date</h5>
               <h4 className="mb-0">{stkTime ? stkTime : 0}</h4>
             </div>
           </div>
@@ -602,7 +602,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Stake Capping </h5>
+              <h5>Staking Assured ROI </h5>
               <h4 className="mb-0">{stkCapping ? stkCapping : 0}</h4>
             </div>
           </div>
@@ -611,7 +611,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Stake Month </h5>
+              <h5>Staking Month </h5>
               <h4 className="mb-0">{stkMonths ? stkMonths : 0}</h4>
             </div>
           </div>
@@ -934,7 +934,7 @@ const Dashboard = () => {
                       <input
                         className="btn mt-3 submitbtn_"
                         type="submit"
-                        value="Withdraw Income"
+                        value="Withdraw Staking ROI"
                       />
                     </div>
                   </form>
@@ -955,7 +955,7 @@ const Dashboard = () => {
                       <input
                         className="btn mt-3 submitbtn_"
                         type="submit"
-                        value="Withdraw Staking ROI"
+                        value="Withdraw Income"
                       />
                     </div>
                   </form>
