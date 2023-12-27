@@ -676,7 +676,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>User capping</h5>
+              <h5>User Income capping</h5>
               <h4 className="mb-0">{capping ? capping : 0} USDT</h4>
             </div>
           </div>
@@ -723,7 +723,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Income Taken</h5>
+              <h5>Working Income Taken</h5>
               <h4 className="mb-0">{incomeTaken ? incomeTaken : 0} USDT</h4>
             </div>
           </div>
@@ -732,7 +732,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>ROI Taken</h5>
+              <h5>User ROI Taken</h5>
               <h4 className="mb-0">{takenROI ? takenROI : 0} USDT</h4>
             </div>
           </div>
@@ -742,7 +742,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>ROI withdrawal/start time</h5>
+              <h5>ROI withdrawal/start Date</h5>
               <h4 className="mb-0">{userStakeTimes ? userStakeTimes : 0}</h4>
             </div>
           </div>
@@ -761,7 +761,7 @@ const Dashboard = () => {
         <div className="col-lg-4 col-md-6 col-sm-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h5>Withdrawable Income</h5>
+              <h5>Withdrawable Working Income</h5>
               <h4 className="mb-0">
                 {withdrawableIncome ? withdrawableIncome : 0} USDT
               </h4>
